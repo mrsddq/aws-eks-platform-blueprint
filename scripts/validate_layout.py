@@ -17,7 +17,7 @@ REQUIRED_FILES = [
     "kubernetes/app/autoscaling.yaml",
     "kubernetes/argocd/application.yaml",
     "kubernetes/observability/prometheus-values.yaml",
-    "docs/RUNBOOK.md",
+    "docs/runbook.md",
 ]
 
 

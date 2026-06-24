@@ -19,7 +19,7 @@ terraform fmt -recursive -check terraform
 | GitOps application | `kubernetes/argocd/application.yaml` | Argo CD reconciliation model. |
 | Workload controls | `kubernetes/app/` | Probes, HPA, PDB, resources and ingress path. |
 | Observability values | `kubernetes/observability/` | Prometheus, Grafana and Loki installation inputs. |
-| Runbook | `docs/RUNBOOK.md` | Bootstrap, troubleshooting and rollback discipline. |
+| Runbook | `docs/runbook.md` | Bootstrap, troubleshooting and rollback discipline. |
 
 ## Interview Proof Points
 
@@ -27,3 +27,14 @@ terraform fmt -recursive -check terraform
 - Explain IRSA and why AWS permissions should not live on broad node roles.
 - Explain where Terraform ownership stops and Argo CD ownership begins.
 - Explain how Prometheus, Grafana and Loki support incident response.
+
+## Screenshots And Proof To Capture
+
+- GitHub Actions CI run for this repo.
+- `terraform plan` summary from a sandbox account.
+- Argo CD Application sync screen after bootstrap.
+- `kubectl get nodes` and `kubectl get pods -A` after deployment.
+- Grafana EKS/platform dashboard after metrics ingestion.
+- AWS Budget or cost estimate used for the demo.
+
+Do not add screenshots from unrelated clusters or accounts.

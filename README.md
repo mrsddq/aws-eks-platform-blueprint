@@ -60,6 +60,31 @@ terraform fmt -recursive -check terraform
 
 See [docs/PORTFOLIO_EVIDENCE.md](docs/PORTFOLIO_EVIDENCE.md) for the evidence checklist, validation commands, and interview proof points.
 
+## Production Docs
+
+- [Architecture](docs/architecture.md)
+- [Runbook](docs/runbook.md)
+- [Incident response](docs/incident-response.md)
+- [Cost estimate](docs/cost-estimate.md)
+- [Security controls](docs/security-controls.md)
+
+## Make Targets
+
+```bash
+make test
+make lint
+make local-demo
+make security-scan
+make deploy CONFIRM_DEPLOY=true
+make destroy CONFIRM_DEPLOY=true
+```
+
+`deploy` and `destroy` are guarded because they create or remove billable AWS resources.
+
+## Interview Story
+
+This project demonstrates EKS platform provisioning, GitOps deployment, observability, autoscaling, IAM boundaries, security checks, cost awareness and production-style runbooks.
+
 ## Deployment Flow
 
 1. Configure an S3 backend and DynamoDB lock table.

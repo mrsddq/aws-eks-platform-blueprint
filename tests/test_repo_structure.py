@@ -18,7 +18,7 @@ class RepoStructureTest(unittest.TestCase):
         self.assertIn("livenessProbe:", deployment)
 
     def test_docs_include_operational_runbook(self):
-        runbook = (ROOT / "docs" / "RUNBOOK.md").read_text(encoding="utf-8")
+        runbook = (ROOT / "docs" / "runbook.md").read_text(encoding="utf-8")
         self.assertIn("Rollback", runbook)
         self.assertIn("Post-Deploy Checks", runbook)
 
