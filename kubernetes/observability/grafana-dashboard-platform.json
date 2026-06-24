@@ -1,0 +1,25 @@
+{
+  "title": "EKS Platform Overview",
+  "schemaVersion": 39,
+  "version": 1,
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Cluster CPU Usage",
+      "targets": [
+        {
+          "expr": "sum(rate(container_cpu_usage_seconds_total{container!=''}[5m]))"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Pod Restarts",
+      "targets": [
+        {
+          "expr": "sum(increase(kube_pod_container_status_restarts_total[1h]))"
+        }
+      ]
+    }
+  ]
+}
