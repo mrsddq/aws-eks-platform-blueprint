@@ -1,5 +1,7 @@
 # AWS EKS Platform Blueprint
 
+[![CI](https://github.com/mrsddq/aws-eks-platform-blueprint/actions/workflows/ci.yml/badge.svg)](https://github.com/mrsddq/aws-eks-platform-blueprint/actions/workflows/ci.yml)
+
 Production-style AWS EKS platform blueprint for a DevOps / Platform Engineer portfolio. It provisions the cloud foundation with Terraform and describes the Kubernetes platform layer with GitOps-ready manifests.
 
 ## What This Builds
@@ -53,6 +55,10 @@ Optional Terraform formatting:
 ```bash
 terraform fmt -recursive -check terraform
 ```
+
+## Portfolio Evidence
+
+See [docs/PORTFOLIO_EVIDENCE.md](docs/PORTFOLIO_EVIDENCE.md) for the evidence checklist, validation commands, and interview proof points.
 
 ## Deployment Flow
 
