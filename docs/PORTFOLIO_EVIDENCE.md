@@ -20,6 +20,7 @@ terraform fmt -recursive -check terraform
 | Workload controls | `kubernetes/app/` | Probes, HPA, PDB, resources and ingress path. |
 | Observability values | `kubernetes/observability/` | Prometheus, Grafana and Loki installation inputs. |
 | Runbook | `docs/runbook.md` | Bootstrap, troubleshooting and rollback discipline. |
+| Security scan | `.github/workflows/ci.yml` | Checkov scans Terraform and Kubernetes manifests in CI. |
 
 ## Interview Proof Points
 
