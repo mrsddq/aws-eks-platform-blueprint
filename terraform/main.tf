@@ -15,7 +15,7 @@ locals {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 5.8"
+  version = "5.21.0"
 
   name = "${var.cluster_name}-vpc"
   cidr = var.vpc_cidr
@@ -43,18 +43,19 @@ module "vpc" {
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 20.0"
+  version = "20.37.2"
 
   cluster_name    = var.cluster_name
-  cluster_version = "1.30"
+  cluster_version = var.cluster_version
 
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
 
   enable_irsa = true
 
-  cluster_endpoint_public_access  = true
-  cluster_endpoint_private_access = true
+  cluster_endpoint_public_access       = var.cluster_endpoint_public_access
+  cluster_endpoint_public_access_cidrs = var.cluster_endpoint_public_access_cidrs
+  cluster_endpoint_private_access      = true
 
   cluster_enabled_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 
@@ -77,4 +78,13 @@ module "eks" {
   }
 
   tags = local.common_tags
+}
+
+resource "terraform_data" "endpoint_access_guard" {
+  lifecycle {
+    precondition {
+      condition     = !var.cluster_endpoint_public_access || length(var.cluster_endpoint_public_access_cidrs) > 0
+      error_message = "Public API access requires explicit trusted CIDRs."
+    }
+  }
 }

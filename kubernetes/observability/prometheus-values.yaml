@@ -13,7 +13,11 @@ prometheus:
 grafana:
   enabled: true
   defaultDashboardsEnabled: true
-  adminPassword: change-me-in-secret-manager
+  # Provision this Secret out of band; never commit its values.
+  admin:
+    existingSecret: grafana-admin
+    userKey: admin-user
+    passwordKey: admin-password
   sidecar:
     dashboards:
       enabled: true

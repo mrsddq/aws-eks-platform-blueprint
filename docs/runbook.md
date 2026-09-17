@@ -7,10 +7,14 @@
 - AWS CLI authenticated through SSO or an assumed role
 - `kubectl`
 - Remote state bucket and lock table before shared use
+- Explicit `TF_VAR_cluster_version` verified against current EKS support
+- A runner with VPC access for the default private API endpoint
+- EKS access entries granting the operator the necessary Kubernetes permissions
 
 ## Validate
 
 ```bash
+python -m pip install -r requirements-dev.txt
 make test
 make lint
 make local-demo
@@ -31,6 +35,10 @@ kubectl get pods -A
 kubectl get nodes
 kubectl get pods -A
 kubectl get ingress -A
+# Before ingress/HPA: install AWS Load Balancer Controller and metrics-server.
+# Annotate kube-system/aws-load-balancer-controller with the
+# load_balancer_controller_role_arn Terraform output.
+# Before observability: provision grafana-admin Secret using an external secret manager.
 kubectl top nodes
 ```
 

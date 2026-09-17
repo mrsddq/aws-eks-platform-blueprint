@@ -4,9 +4,14 @@ CONFIRM_DEPLOY ?= false
 
 validate: test
 	python scripts/validate_layout.py
+	python scripts/validate_manifests.py
 
 fmt:
 	terraform fmt -recursive terraform
+
+terraform-validate:
+	terraform -chdir=terraform init -backend=false
+	terraform -chdir=terraform validate
 
 lint: validate
 	terraform fmt -recursive -check terraform
@@ -28,11 +33,7 @@ destroy: prerequisites
 	terraform -chdir=terraform destroy
 
 local-demo:
-	kubectl apply --dry-run=client -f kubernetes/namespaces.yaml
-	kubectl apply --dry-run=client -f kubernetes/rbac.yaml
-	kubectl apply --dry-run=client -f kubernetes/app/deployment.yaml
-	kubectl apply --dry-run=client -f kubernetes/app/service.yaml
-	kubectl apply --dry-run=client -f kubernetes/app/autoscaling.yaml
+	kubectl kustomize kubernetes
 
 test:
 	python -m unittest discover -s tests

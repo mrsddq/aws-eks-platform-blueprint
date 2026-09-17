@@ -22,3 +22,8 @@ output "private_subnets" {
   description = "Private subnet IDs used by EKS nodes."
   value       = module.vpc.private_subnets
 }
+
+output "load_balancer_controller_role_arn" {
+  description = "Annotate the kube-system/aws-load-balancer-controller ServiceAccount with this IRSA role."
+  value       = module.load_balancer_controller_irsa.iam_role_arn
+}

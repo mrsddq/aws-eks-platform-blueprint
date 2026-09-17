@@ -3,11 +3,13 @@
 ## Implemented
 
 - EKS worker nodes in private subnets.
-- IAM policy boundary example for AWS Load Balancer Controller.
+- IRSA role restricted to kube-system/aws-load-balancer-controller, using the maintained controller policy.
+- Private EKS API by default; public access requires an explicit trusted CIDR list.
+- Grafana admin credentials are loaded from an existing Secret.
 - Kubernetes namespaces and RBAC.
 - Resource limits, probes, HPA and PodDisruptionBudget.
 - GitHub Actions validation.
-- Optional Checkov scan through `make security-scan`.
+- Advisory Checkov scan in CI; `make security-scan` fails on findings.
 
 ## Recommended Production Additions
 
