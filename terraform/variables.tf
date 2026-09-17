@@ -52,7 +52,7 @@ variable "cluster_endpoint_public_access_cidrs" {
   validation {
     condition = alltrue([
       for cidr in var.cluster_endpoint_public_access_cidrs :
-      can(cidrnetmask(cidr)) && cidr != "0.0.0.0/0"
+      try(cidrnetmask(cidr) != "0.0.0.0", false)
     ])
     error_message = "Use valid IPv4 CIDRs and never allow 0.0.0.0/0."
   }
