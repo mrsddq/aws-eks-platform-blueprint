@@ -27,3 +27,33 @@ variable "node_instance_types" {
   type        = list(string)
   default     = ["t3.large"]
 }
+
+variable "cluster_version" {
+  description = "Supported EKS Kubernetes minor version, chosen explicitly before planning."
+  type        = string
+
+  validation {
+    condition     = can(regex("^1\\.[0-9]+$", var.cluster_version))
+    error_message = "Specify a Kubernetes minor version such as 1.XX, verified against current EKS support."
+  }
+}
+
+variable "cluster_endpoint_public_access" {
+  description = "Expose the Kubernetes API publicly only when trusted CIDRs are set."
+  type        = bool
+  default     = false
+}
+
+variable "cluster_endpoint_public_access_cidrs" {
+  description = "Trusted IPv4 CIDRs allowed to reach an enabled public API endpoint."
+  type        = list(string)
+  default     = []
+
+  validation {
+    condition = alltrue([
+      for cidr in var.cluster_endpoint_public_access_cidrs :
+      try(cidrnetmask(cidr) != "0.0.0.0", false)
+    ])
+    error_message = "Use valid IPv4 CIDRs and never allow 0.0.0.0/0."
+  }
+}
